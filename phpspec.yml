@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: DOLucasDelivery
+        psr4_prefix: DOLucasDelivery
+        src_path: app
