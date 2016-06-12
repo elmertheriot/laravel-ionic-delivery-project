@@ -1,5 +1,11 @@
 <?php
 
+use Faker\Generator;
+use DOLucasDelivery\Models\User;
+use DOLucasDelivery\Models\Category;
+use DOLucasDelivery\Models\Product;
+use DOLucasDelivery\Models\Client;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -11,7 +17,7 @@
 |
 */
 
-$factory->define(DOLucasDelivery\Models\User::class, function (Faker\Generator $faker) {
+$factory->define(User::class, function (Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,
@@ -20,8 +26,26 @@ $factory->define(DOLucasDelivery\Models\User::class, function (Faker\Generator $
     ];
 });
 
-$factory->define(DOLucasDelivery\Models\Category::class, function (Faker\Generator $faker) {
+$factory->define(Category::class, function (Generator $faker) {
     return [
         'name' => $faker->word,
+    ];
+});
+
+$factory->define(Product::class, function (Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'description' => $faker->sentence,
+        'price' => $faker->numberBetween(10, 50)
+    ];
+});
+
+$factory->define(Client::class, function (Generator $faker) {
+    return [
+        'phone' => $faker->phoneNumber,
+        'address' => $faker->address,
+        'city' => $faker->city,
+        'state' => $faker->state,
+        'zipcode' => $faker->postcode
     ];
 });
