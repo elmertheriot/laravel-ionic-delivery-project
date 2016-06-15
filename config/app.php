@@ -146,6 +146,7 @@ return [
         DOLucasDelivery\Providers\AuthServiceProvider::class,
         DOLucasDelivery\Providers\EventServiceProvider::class,
         DOLucasDelivery\Providers\RouteServiceProvider::class,
+        DOLucasDelivery\Providers\RepositoryServiceProvider::class,
 
     ],
 
