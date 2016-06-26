@@ -11,7 +11,7 @@
     @include('admin.categories._form')
     
     <br>
-    <div class="from-group">
+    <div class="form-group">
         {!! Form::submit('Save category', ['class' => 'btn btn-primary']) !!}
     </div>
 
