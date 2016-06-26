@@ -5,6 +5,7 @@ namespace DOLucasDelivery\Http\Controllers;
 use Illuminate\Http\Request;
 
 use DOLucasDelivery\Http\Requests;
+use DOLucasDelivery\Http\Requests\AdminCategoryRequest;
 use DOLucasDelivery\Http\Controllers\Controller;
 use DOLucasDelivery\Repositories\CategoryRepository;
 
@@ -33,7 +34,7 @@ class CategoriesController extends Controller
         return view('admin.categories.create');
     }
 
-    public function store(Request $request)
+    public function store(AdminCategoryRequest $request)
     {
         $data = $request->all();
         $this->repository->create($data);
