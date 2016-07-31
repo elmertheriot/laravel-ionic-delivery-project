@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="container">
-    <h3>Edit Category: {{ $category->name }}</h3>
+    <h3>Edit Client: {{ $client->user->name }}</h3>
 
     @include('errors._check')
 
-    {!! Form::model($category, ['route' => ['admin.categories.update', $category->id]]) !!}
+    {!! Form::model($client, ['route' => ['admin.clients.update', $client->id]]) !!}
     
-    @include('admin.categories._form')
+    @include('admin.clients._form')
     
     <br>
     <div class="form-group">
