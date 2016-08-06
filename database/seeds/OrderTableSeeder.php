@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use DOLucasDelivery\Models\Category;
-use DOLucasDelivery\Models\Product;
+use DOLucasDelivery\Models\Order;
+use DOLucasDelivery\Models\OrderItem;
 
-class CategoryTableSeeder extends Seeder
+class OrderTableSeeder extends Seeder
 {
+
     /**
      * Run the database seeds.
      *
@@ -13,10 +14,14 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Category::class, 10)->create()->each(function ($category) {
-            for ($i = 0; $i < 5; $i++) { 
-                $category->products()->save(factory(Product::class)->make());
+        factory(Order::class, 10)->create()->each(function ($order) {
+            for ($i = 0; $i < 2; $i++) {
+                $order->items()->save(factory(OrderItem::class)->make([
+                    'product_id' => rand(1, 5),
+                    'qty' => 2,
+                    'price' => 50
+                ]));
             }
         });
     }
-}   
+}

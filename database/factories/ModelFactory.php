@@ -5,6 +5,8 @@ use DOLucasDelivery\Models\User;
 use DOLucasDelivery\Models\Category;
 use DOLucasDelivery\Models\Product;
 use DOLucasDelivery\Models\Client;
+use DOLucasDelivery\Models\Order;
+use DOLucasDelivery\Models\OrderItem;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,5 +49,19 @@ $factory->define(Client::class, function (Generator $faker) {
         'city' => $faker->city,
         'state' => $faker->state,
         'zipcode' => $faker->postcode
+    ];
+});
+
+$factory->define(Order::class, function (Generator $faker) {
+    return [
+        'client_id' => rand(1, 10),
+        'total' => rand(50, 100),
+        'status' => 0
+    ];
+});
+
+$factory->define(OrderItem::class, function (Generator $faker) {
+    return [
+
     ];
 });
