@@ -55,6 +55,7 @@ $factory->define(Client::class, function (Generator $faker) {
 $factory->define(Order::class, function (Generator $faker) {
     return [
         'client_id' => rand(1, 10),
+        //'user_deliveryman_id' => rand(11, 13),
         'total' => rand(50, 100),
         'status' => 0
     ];

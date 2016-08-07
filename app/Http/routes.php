@@ -36,4 +36,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.checkrole', 'as' => 'ad
     Route::get('products/destroy/{id}', ['as' => 'products.destroy', 'uses' => 'ProductsController@destroy']);
 
     Route::get('orders', ['as' => 'orders.index', 'uses' => 'OrdersController@index']);
+    Route::get('orders/{id}', ['as' => 'orders.edit', 'uses' => 'OrdersController@edit']);
+    Route::post('orders/update/{id}', ['as' => 'orders.update', 'uses' => 'OrdersController@update']);
 });

@@ -15,7 +15,7 @@ class OrderTableSeeder extends Seeder
     public function run()
     {
         factory(Order::class, 10)->create()->each(function ($order) {
-            for ($i = 0; $i < 2; $i++) {
+            for ($i = 0; $i < 3; $i++) {
                 $order->items()->save(factory(OrderItem::class)->make([
                     'product_id' => rand(1, 5),
                     'qty' => 2,

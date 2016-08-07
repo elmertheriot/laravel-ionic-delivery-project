@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('client_id')->references('id')->on('users');
 
             $table->integer('user_deliveryman_id')->unsigned()->nullble();
-            //$table->foreign('user_deliveryman_id')->references('id')->on('users')->nullble();
+            //$table->foreign('user_deliveryman_id')->references('id')->on('users');
 
             $table->decimal('total');
             $table->smallInteger('status')->default(0);
