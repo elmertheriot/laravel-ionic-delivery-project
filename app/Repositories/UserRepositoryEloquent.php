@@ -14,6 +14,7 @@ use DOLucasDelivery\Validators\UserValidator;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
+    
     /**
      * Specify Model class name
      *
