@@ -38,5 +38,9 @@ class RepositoryServiceProvider extends ServiceProvider
             'DOLucasDelivery\Repositories\UserRepository',
             'DOLucasDelivery\Repositories\UserRepositoryEloquent'
         );
+        $this->app->bind(
+            'DOLucasDelivery\Repositories\CouponRepository',
+            'DOLucasDelivery\Repositories\CouponRepositoryEloquent'
+        );
     }
 }

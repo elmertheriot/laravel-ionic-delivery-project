@@ -7,6 +7,7 @@ use DOLucasDelivery\Models\Product;
 use DOLucasDelivery\Models\Client;
 use DOLucasDelivery\Models\Order;
 use DOLucasDelivery\Models\OrderItem;
+use DOLucasDelivery\Models\Coupon;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,5 +65,12 @@ $factory->define(Order::class, function (Generator $faker) {
 $factory->define(OrderItem::class, function (Generator $faker) {
     return [
 
+    ];
+});
+
+$factory->define(Coupon::class, function (Generator $faker) {
+    return [
+        'code' => rand(1000, 9999),
+        'value' => rand(50, 100)
     ];
 });
