@@ -5,7 +5,7 @@ namespace DOLucasDelivery\Http\Controllers;
 use Illuminate\Http\Request;
 
 use DOLucasDelivery\Http\Requests;
-use DOLucasDelivery\Http\Requests\AdminCategoryRequest;
+use DOLucasDelivery\Http\Requests\AdminCouponRequest;
 use DOLucasDelivery\Http\Controllers\Controller;
 use DOLucasDelivery\Repositories\CouponRepository;
 
@@ -34,7 +34,7 @@ class CouponsController extends Controller
         return view('admin.coupons.create');
     }
 
-    public function store(AdminCategoryRequest $request)
+    public function store(AdminCouponRequest $request)
     {
         $data = $request->all();
         $this->repository->create($data);
@@ -49,11 +49,13 @@ class CouponsController extends Controller
         return view('admin.coupons.edit', compact('category'));
     }
 
-    public function update(AdminCategoryRequest $request, $id)
+    /*
+    public function update(AdminCouponRequest $request, $id)
     {
         $data = $request->all();
         $this->repository->update($data, $id);
 
         return redirect()->route('admin.coupons.index');
     }
+    */
 }
