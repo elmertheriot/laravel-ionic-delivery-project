@@ -10,6 +10,7 @@ use DOLucasDelivery\Repositories\OrderRepository;
 use DOLucasDelivery\Repositories\UserRepository;
 use DOLucasDelivery\Repositories\ProductRepository;
 use DOLucasDelivery\Services\OrderService;
+use Auth;
 
 class CheckoutController extends Controller
 {

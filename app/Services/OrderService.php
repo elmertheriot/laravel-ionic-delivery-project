@@ -4,6 +4,7 @@ namespace DOLucasDelivery\Services;
 
 use DOLucasDelivery\Repositories\OrderRepository;
 use DOLucasDelivery\Repositories\CouponRepository;
+use DOLucasDelivery\Repositories\ProductRepository;
 use DB;
 
 class OrderService

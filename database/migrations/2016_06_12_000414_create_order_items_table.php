@@ -22,7 +22,7 @@ class CreateOrderItemsTable extends Migration
             $table->foreign('order_id')->references('id')->on('orders');
 
             $table->decimal('price');
-            $table->smallInteger('qty');           
+            $table->smallInteger('qty');
 
             $table->timestamps();
         });
