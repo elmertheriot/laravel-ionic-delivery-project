@@ -42,6 +42,10 @@
                 </table>
             </div>
 
+            <div class="form-group">
+                {!! Form::submit('Create Order', ['class' => 'btn btn-primary']) !!}
+            </div>
+
             {!! Form::close() !!}
         </div>
     </div>
