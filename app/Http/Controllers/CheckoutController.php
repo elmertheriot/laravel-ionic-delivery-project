@@ -40,7 +40,7 @@ class CheckoutController extends Controller
 
     public function create()
     {
-        $products = $this->productRepository->listsNameId();
+        $products = $this->productRepository->getIdNamePrice();
 
         return view('customer.order.create', compact('products'));
     }
