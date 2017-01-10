@@ -55,11 +55,17 @@ Route::post('oauth/access_token', function() {
 });
 
 Route::group(['prefix' => 'api', 'middleware' => 'oauth', 'as' => 'api.'], function () {
-    Route::get('orders', function () {
-        return [
-            'id' => 1,
-            'client' => 'Lucas',
-            'total' => 10
-        ];
+    Route::group(['prefix' => 'client', 'middleware' => 'oauth.checkrole:client', 'as' => 'client.'], function () {
+        Route::resource('order', 'Api\Client\ClientCheckoutController', ['except' => ['create', 'edit', 'destroy']]);
+    });
+    
+    Route::group(['prefix' => 'deliveryman', 'middleware' => 'oauth.checkrole:deliveryman', 'as' => 'deliveryman.'], function () {
+        Route::get('orders', function () {
+            return [
+                'id' => 1,
+                'client' => 'Lucas - Deliveryman',
+                'total' => 10
+            ];
+        });
     });
 });

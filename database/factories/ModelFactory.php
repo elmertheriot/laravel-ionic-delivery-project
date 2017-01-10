@@ -8,6 +8,7 @@ use DOLucasDelivery\Models\Client;
 use DOLucasDelivery\Models\Order;
 use DOLucasDelivery\Models\OrderItem;
 use DOLucasDelivery\Models\Coupon;
+use DOLucasDelivery\Models\OAuthClient;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,5 +73,11 @@ $factory->define(Coupon::class, function (Generator $faker) {
     return [
         'code' => rand(1000, 9999),
         'value' => rand(50, 100)
+    ];
+});
+
+$factory->define(OAuthClient::class, function (Generator $faker) {
+    return [
+
     ];
 });

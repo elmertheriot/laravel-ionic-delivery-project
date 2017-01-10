@@ -5,6 +5,7 @@ namespace DOLucasDelivery\Services;
 use DOLucasDelivery\Repositories\OrderRepository;
 use DOLucasDelivery\Repositories\CouponRepository;
 use DOLucasDelivery\Repositories\ProductRepository;
+use Exception;
 use DB;
 
 class OrderService
@@ -73,6 +74,8 @@ class OrderService
 
             $order->save();
             DB::commit();
+            
+            return $order;
         } catch (Exception $e) {
             DB::rollback();
             throw $e;
