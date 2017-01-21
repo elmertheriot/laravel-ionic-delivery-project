@@ -7,6 +7,7 @@ use DOLucasDelivery\Repositories\CouponRepository;
 use DOLucasDelivery\Repositories\ProductRepository;
 use Exception;
 use DB;
+use DOLucasDelivery\Models\Order;
 
 class OrderService
 {
@@ -80,5 +81,18 @@ class OrderService
             DB::rollback();
             throw $e;
         }
+    }
+    
+    public function updateStatus($id, $idDeliveryman, $status)
+    {
+        $order = $this->orderRepository->getByIdAndDeliveryman($id, $idDeliveryman);
+        
+        if ($order instanceof Order) {
+            $order->status = $status;
+            $order->save();
+            return $order;
+        }
+        
+        return false;
     }
 }

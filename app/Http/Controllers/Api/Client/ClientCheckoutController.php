@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use DOLucasDelivery\Http\Controllers\Controller;
 use DOLucasDelivery\Repositories\OrderRepository;
 use DOLucasDelivery\Repositories\UserRepository;
-use DOLucasDelivery\Repositories\ProductRepository;
 use DOLucasDelivery\Services\OrderService;
 use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
@@ -24,11 +23,6 @@ class ClientCheckoutController extends Controller
     private $userRepository;
 
     /**
-     * @var OrderRepository
-     */
-    private $productRepository;
-
-    /**
      * @var OrderService
      */
     private $orderService;
@@ -36,12 +30,10 @@ class ClientCheckoutController extends Controller
     public function __construct(
         OrderRepository $orderRepository,
         UserRepository $userRepository,
-        ProductRepository $productRepository,
         OrderService $orderService
     ) {
         $this->orderRepository   = $orderRepository;
         $this->userRepository    = $userRepository;
-        $this->productRepository = $productRepository;
         $this->orderService      = $orderService;
     }
 
