@@ -43,13 +43,17 @@ class OrderService
 
         try {
             $data['status'] = 0;
+            
+            if (isset($data['coupon_id'])) {
+                unset($data['coupon_id']);
+            }
 
             if (isset($data['coupon_code'])) {
                 $coupon = $this->couponRepository->findByField('code', $data['coupon_code'])->first();
                 
-                $data['coupon'] = $coupon->id;
+                $data['coupon_id'] = $coupon->id;
 
-                $coupon->user = 1;
+                $coupon->used = 1;
                 $coupon->save();
 
                 unset($data['coupon_code']);
