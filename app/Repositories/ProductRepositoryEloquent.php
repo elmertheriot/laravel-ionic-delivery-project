@@ -7,6 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use DOLucasDelivery\Repositories\ProductRepository;
 use DOLucasDelivery\Models\Product;
 use DOLucasDelivery\Validators\ProductValidator;
+use DOLucasDelivery\Presenters\ProductPresenter;
 
 /**
  * Class ProductRepositoryEloquent
@@ -14,6 +15,9 @@ use DOLucasDelivery\Validators\ProductValidator;
  */
 class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
 {
+    
+    protected $skipPresenter = true;
+    
     /**
      * Specify Model class name
      *
@@ -35,5 +39,10 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     public function getIdNamePrice()
     {
         return $this->model->get(['id', 'name', 'price']);
+    }
+    
+    public function presenter()
+    {
+        return ProductPresenter::class;
     }
 }

@@ -1,4 +1,6 @@
 // Ionic Starter App
+angular.module('delivery.controllers', []);
+angular.module('delivery.services', []);
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
@@ -6,8 +8,14 @@
 angular.module('delivery', [
 	'ionic',
 	'delivery.controllers',
-	'angular-oauth2'
+	'delivery.services',
+	'angular-oauth2',
+	'ngResource'
 ])
+
+.constant('appConfig', {
+	baseUrl: 'http://localhost:8000'
+})
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -27,9 +35,9 @@ angular.module('delivery', [
   });
 })
 
-.config(function ($stateProvider, OAuthProvider, OAuthTokenProvider) {
+.config(function ($stateProvider, OAuthProvider, OAuthTokenProvider, appConfig) {
 	OAuthProvider.configure({
-    baseUrl: 'http://localhost:8000',
+    baseUrl: appConfig.baseUrl,
     clientId: 'appid01',
     clientSecret: 'secret', // optional
     grantPath: '/oauth/access_token'
@@ -54,5 +62,32 @@ angular.module('delivery', [
 			controller: function ($scope) {
 				
 			}
+		})
+		.state('client', {
+			abstract: true,
+			url: '/client',
+			template: '<ion-nav-view/>'
+		})
+		.state('client.checkout', {
+			cache: false,
+			url: '/checkout',
+			templateUrl: 'templates/client/checkout.html',
+			controller: 'ClientCheckoutController'
+		})
+		.state('client.checkout-item-detail', {
+			url: '/checkout/detail/:index',
+			templateUrl: 'templates/client/checkout-item-detail.html',
+			controller: 'ClientCheckoutDetailController'
+		})
+		.state('client.checkout-successful', {
+			cache: false,
+			url: '/checkout/successful',
+			templateUrl: 'templates/client/checkout-successful.html',
+			controller: 'ClientCheckoutSuccessfulController'
+		})
+		.state('client.view-products', {
+			url: '/view-products',
+			templateUrl: 'templates/client/view-products.html',
+			controller: 'ClientViewProductsController'
 		});
 });

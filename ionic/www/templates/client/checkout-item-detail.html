@@ -1,0 +1,28 @@
+<ion-view>
+  <ion-nav-title>Product: {{ product.name }}</ion-nav-title>
+  <div class="bar bar-subheader">
+    <h2>Product detail</h2>
+  </div>
+  <ion-content class="padding has-subheader">
+    <div class="list card">
+      <div class="item item-avatar">
+        <h2>{{ product.name }}</h2>
+        Qty: {{ product.qty }} <br />
+        <i class="ion ion-cash"> {{ item.price }}</i>
+      </div>
+      
+      <label class="item item-input">
+        <span class="input-label">Quantity</span>
+        <input type="text" placeholder="Type the quantity" ng-model="product.qty" />
+      </label>
+      <button type="button" class="button button-assertive button-full" ng-click="updateQty()">
+        Update quantity
+      </button>
+      
+      <div class="item item-body">
+        <h2>Description</h2>
+        <p>{{ product.description }}</p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

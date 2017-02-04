@@ -1,5 +1,5 @@
 angular
-	.module('delivery.controllers', [])
+	.module('delivery.controllers')
 	.controller('LoginController', LoginController);
 
 LoginController.$inject = [
