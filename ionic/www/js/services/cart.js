@@ -68,6 +68,29 @@ function CartService($localStorage) {
 		$localStorage.setObject(key, cart);
 	};
 	
+	this.setCoupon = function (code, value) {
+		var cart = this.get();
+		cart.coupon = {
+			code: code,
+			value: value
+		};
+		$localStorage.setObject(key, cart);
+	};
+	
+	this.removeCoupon = function () {
+		var cart = this.get();
+		cart.coupon = {
+			code: null,
+			value: null
+		};
+		$localStorage.setObject(key, cart);
+	};
+	
+	this.getTotalWithDiscount = function () {
+		var cart = this.get();
+		return cart.total - (cart.coupon.value || 0);
+	};
+	
 	function calculateSubTotal(item) {
 		return item.price * item.qty;
 	}
@@ -83,7 +106,11 @@ function CartService($localStorage) {
 	function initCart() {
 		$localStorage.setObject(key, {
 			items: [],
-			total: 0
+			total: 0,
+			coupon: {
+				code: null,
+				value: null
+			}
 		});
 	}
 }

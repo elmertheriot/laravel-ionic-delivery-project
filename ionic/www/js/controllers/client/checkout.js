@@ -8,7 +8,8 @@ ClientCheckoutController.$inject = [
 	'$ionicLoading',
 	'$ionicPopup',
 	'$cart',
-	'Order'
+	'Order',
+	'Coupon'
 ];
 
 function ClientCheckoutController(
@@ -17,22 +18,26 @@ function ClientCheckoutController(
 	$ionicLoading,
 	$ionicPopup,
 	$cart,
-	Order
+	Order,
+	Coupon
 ) {
 	var cart = $cart.get();
-		
-	$scope.items = cart.items;
-	$scope.total = cart.total;
+	
+	$scope.coupon = cart.coupon;	
+	$scope.items  = cart.items;
+	$scope.total  = $cart.getTotalWithDiscount();
 	
 	$scope.removeItem  			 = removeItem;
 	$scope.openProductDetail = openProductDetail;
 	$scope.openListProducts  = openListProducts;
 	$scope.saveOrder 				 = saveOrder;
+	$scope.readBarCode			 = readBarCode;
+	$scope.removeCoupon      = removeCoupon; 
 	
 	function removeItem(index) {
 		$cart.removeItem(index);
 		$scope.items.splice(index, 1);
-		$scope.total = $cart.get().total;
+		$scope.total = $cart.getTotalWithDiscount();
 	}
 	
 	function openProductDetail(index) {
@@ -46,9 +51,11 @@ function ClientCheckoutController(
 	}
 	
 	function saveOrder() {
-		var items = angular.copy($scope.items);
+		var order = {
+				items: angular.copy($scope.items)
+		};
 		
-		items.filter(function (item) {
+		order.items.filter(function (item) {
 			item.product_id = item.id;
 			return item;
 		});
@@ -57,7 +64,11 @@ function ClientCheckoutController(
 			template: 'Loading...'
 		});
 		
-		Order.save({ id: null }, { items: items }, success, error);
+		if ($scope.coupon.value) {
+			order.coupon_code = $scope.coupon.code;
+		}
+		
+		Order.save({ id: null }, order, success, error);
 		
 		function success(res) {
 			$ionicLoading.hide();
@@ -72,4 +83,42 @@ function ClientCheckoutController(
 			});
 		}
 	}
+	
+	function readBarCode() {
+		getValueCoupon(5875);
+	}
+	
+	function removeCoupon() {
+		$cart.removeCoupon();
+		
+		$scope.coupon = $cart.get().coupon;
+		$scope.total  = $cart.getTotalWithDiscount();
+	}
+	
+	function getValueCoupon(code) {
+		$ionicLoading.show({
+			template: 'Loading...'
+		});
+		
+		Coupon.get({code: code}, success, error);
+		
+		function success(res) {
+			$cart.setCoupon(res.data.code, res.data.value);
+			
+			$scope.coupon = $cart.get().coupon;
+			$scope.total  = $cart.getTotalWithDiscount();
+			
+			$ionicLoading.hide();
+		}
+		
+		function error(err) {
+			$ionicLoading.hide();
+			$ionicPopup.alert({
+				title: 'Warning',
+				template: 'Invalid coupon.'
+			});
+		}
+	}
+	
+	$scope.readBarCode();
 }

@@ -14,8 +14,9 @@ function ClientCheckoutSuccessfulController(
 	$cart
 ) {
 	var cart = $cart.get();
-	$scope.items = cart.items;
-	$scope.total = cart.total;
+	$scope.coupon = cart.coupon;
+	$scope.items  = cart.items;
+	$scope.total  = $cart.getTotalWithDiscount();
 	$cart.clear();
 	
 	$scope.openOrderList = openOrderList;
