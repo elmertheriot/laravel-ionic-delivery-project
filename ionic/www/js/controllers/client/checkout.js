@@ -7,6 +7,7 @@ ClientCheckoutController.$inject = [
 	'$state',
 	'$ionicLoading',
 	'$ionicPopup',
+	'$cordovaBarcodeScanner',
 	'$cart',
 	'Order',
 	'Coupon'
@@ -17,6 +18,7 @@ function ClientCheckoutController(
 	$state,
 	$ionicLoading,
 	$ionicPopup,
+	$cordovaBarcodeScanner,
 	$cart,
 	Order,
 	Coupon
@@ -85,7 +87,16 @@ function ClientCheckoutController(
 	}
 	
 	function readBarCode() {
-		getValueCoupon(5875);
+		$cordovaBarcodeScanner
+	    .scan()
+	    .then(function(barcodeData) {
+	    	getValueCoupon(barcodeData.text);
+	    }, function(error) {
+	    	$ionicPopup.alert({
+					title: 'Warning',
+					template: 'It was not possible to read barcode.'
+				});
+	    });
 	}
 	
 	function removeCoupon() {
@@ -119,6 +130,4 @@ function ClientCheckoutController(
 			});
 		}
 	}
-	
-	$scope.readBarCode();
 }

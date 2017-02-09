@@ -10,11 +10,12 @@ angular.module('delivery', [
 	'delivery.controllers',
 	'delivery.services',
 	'angular-oauth2',
-	'ngResource'
+	'ngResource',
+	'ngCordova'
 ])
 
 .constant('appConfig', {
-	baseUrl: 'http://localhost:8000'
+	baseUrl: 'http://192.168.100.3:8000'
 })
 
 .run(function($ionicPlatform) {
