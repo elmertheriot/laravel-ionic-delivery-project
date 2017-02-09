@@ -72,5 +72,7 @@ Route::group(['middleware' => 'cors'], function () {
                 'as' => 'orders.update_status'
             ]);
         });
+        
+        Route::get('coupon/{code}', 'Api\CouponController@show');
     });
 });

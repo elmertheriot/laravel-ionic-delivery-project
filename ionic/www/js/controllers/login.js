@@ -26,7 +26,7 @@ function LoginController(
 		OAuth.getAccessToken($scope.user).then(success, error);
 		
 		function success(res) {
-			$state.go('home');
+			$state.go('client.checkout');
 		}
 		
 		function error(err) {

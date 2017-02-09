@@ -35,7 +35,14 @@ angular.module('delivery', [
   });
 })
 
-.config(function ($stateProvider, OAuthProvider, OAuthTokenProvider, appConfig) {
+.config(function (
+		$stateProvider, 
+		$urlRouterProvider, 
+		$provide, 
+		OAuthProvider, 
+		OAuthTokenProvider, 
+		appConfig
+) {
 	OAuthProvider.configure({
     baseUrl: appConfig.baseUrl,
     clientId: 'appid01',
@@ -90,4 +97,40 @@ angular.module('delivery', [
 			templateUrl: 'templates/client/view-products.html',
 			controller: 'ClientViewProductsController'
 		});
+	
+		$urlRouterProvider.otherwise('/login');
+		
+		$provide.decorator('OAuthToken', OAuthTokenLocalStorageDecorator);
+		
+		OAuthTokenLocalStorageDecorator.$inject = ['$localStorage', '$delegate'];
+		
+		function OAuthTokenLocalStorageDecorator($localStorage, $delegate) {
+			Object.defineProperties($delegate, {
+				setToken: {
+					value: function (data) {
+						return $localStorage.setObject('token', data);
+					},
+					enumerable: true,
+					configurable: true,
+					writable: true
+				},
+				getToken: {
+					value: function () {
+						return $localStorage.getObject('token');
+					},
+					enumerable: true,
+					configurable: true,
+					writable: true
+				},
+				removeToken: {
+					value: function () {
+						$localStorage.setObject('token', null);
+					},
+					enumerable: true,
+					configurable: true,
+					writable: true
+				}
+			});
+			return $delegate;
+		}
 });
