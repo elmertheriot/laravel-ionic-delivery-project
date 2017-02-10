@@ -7,6 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use DOLucasDelivery\Repositories\UserRepository;
 use DOLucasDelivery\Models\User;
 use DOLucasDelivery\Validators\UserValidator;
+use DOLucasDelivery\Presenters\UserPresenter;
 
 /**
  * Class UserRepositoryEloquent
@@ -14,6 +15,8 @@ use DOLucasDelivery\Validators\UserValidator;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
+    
+    protected $skipPresenter = true;
     
     /**
      * Specify Model class name
@@ -36,5 +39,10 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+    
+    public function presenter()
+    {
+        return UserPresenter::class;
     }
 }

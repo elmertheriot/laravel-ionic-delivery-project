@@ -73,6 +73,7 @@ Route::group(['middleware' => 'cors'], function () {
             ]);
         });
         
+        Route::get('authenticated', 'Api\UserController@authenticated');
         Route::get('coupon/{code}', 'Api\CouponController@show');
     });
 });
