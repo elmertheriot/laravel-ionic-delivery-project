@@ -22,6 +22,6 @@ function ClientCheckoutSuccessfulController(
 	$scope.openOrderList = openOrderList;
 	
 	function openOrderList() {
-		
+		$state.go('client.order');
 	}
 }

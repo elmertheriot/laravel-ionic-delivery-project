@@ -1,6 +1,7 @@
 // Ionic Starter App
 angular.module('delivery.controllers', []);
 angular.module('delivery.services', []);
+angular.module('delivery.filters', []);
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
@@ -9,13 +10,14 @@ angular.module('delivery', [
 	'ionic',
 	'delivery.controllers',
 	'delivery.services',
+	'delivery.filters',
 	'angular-oauth2',
 	'ngResource',
 	'ngCordova'
 ])
 
 .constant('appConfig', {
-	baseUrl: 'http://192.168.100.3:8000'
+	baseUrl: 'http://192.168.100.8:8000'
 })
 
 .run(function($ionicPlatform) {
@@ -74,7 +76,18 @@ angular.module('delivery', [
 		.state('client', {
 			abstract: true,
 			url: '/client',
-			template: '<ion-nav-view/>'
+			templateUrl: 'templates/client/menu.html',
+			controller: 'ClientMenuController'
+		})
+		.state('client.order', {
+			url: '/order',
+			templateUrl: 'templates/client/order.html',
+			controller: 'ClientOrderController'
+		})
+		.state('client.view-order', {
+			url: '/view-order/:id',
+			templateUrl: 'templates/client/view-order.html',
+			controller: 'ClientViewOrderController'
 		})
 		.state('client.checkout', {
 			cache: false,
