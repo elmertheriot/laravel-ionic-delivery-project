@@ -1,19 +1,19 @@
 angular
 	.module('delivery.controllers')
-	.controller('ClientViewOrderController', ClientViewOrderController);
+	.controller('DeliverymanViewOrderController', ClientViewOrderController);
 
 ClientViewOrderController.$inject = [
 	'$scope',
 	'$stateParams',
 	'$ionicLoading',
-	'ClientOrder'
+	'DeliverymanOrder'
 ];
 
 function ClientViewOrderController(
 	$scope, 
 	$stateParams,
 	$ionicLoading,
-	ClientOrder
+	DeliverymanOrder
 ) {
 	$scope.order = {};
 	
@@ -29,10 +29,10 @@ function ClientViewOrderController(
 			include: 'items,coupon'
 		};
 		
-		ClientOrder.get(params, success, error);
+		DeliverymanOrder.get(params, success, error);
 		
 		function success(res) {
-			$scope.order = res.data;
+			$scope.order = res;
 			$ionicLoading.hide();
 		}
 		

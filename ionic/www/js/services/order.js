@@ -1,11 +1,30 @@
 angular
 	.module('delivery.services')
-	.factory('Order', OrderService);
+	.factory('ClientOrder', ClientOrderService)
+	.factory('DeliverymanOrder', DeliverymanOrderService);
 
-OrderService.$inject = ['$resource', 'appConfig'];
+ClientOrderService.$inject = ['$resource', 'appConfig'];
 
-function OrderService($resource, appConfig) {
+function ClientOrderService($resource, appConfig) {
 	var url = appConfig.baseUrl + '/api/client/order/:id';
+	
+	var config = {
+		query: {
+			isArray: false
+		}
+	};
+	
+	var params = {
+		id: '@id'
+	};
+	
+	return $resource(url, params, config);
+}
+
+DeliverymanOrderService.$inject = ['$resource', 'appConfig'];
+
+function DeliverymanOrderService($resource, appConfig) {
+	var url = appConfig.baseUrl + '/api/deliveryman/order/:id';
 	
 	var config = {
 		query: {

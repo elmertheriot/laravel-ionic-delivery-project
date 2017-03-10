@@ -17,7 +17,7 @@ angular.module('delivery', [
 ])
 
 .constant('appConfig', {
-	baseUrl: 'http://192.168.100.8:8000'
+	baseUrl: 'http://192.168.100.3:8000'
 })
 
 .run(function($ionicPlatform) {
@@ -75,6 +75,7 @@ angular.module('delivery', [
 		})
 		.state('client', {
 			abstract: true,
+			cache: false,
 			url: '/client',
 			templateUrl: 'templates/client/menu.html',
 			controller: 'ClientMenuController'
@@ -110,6 +111,24 @@ angular.module('delivery', [
 			url: '/view-products',
 			templateUrl: 'templates/client/view-products.html',
 			controller: 'ClientViewProductsController'
+		})
+		.state('deliveryman', {
+			abstract: true,
+			cache: false,
+			url: '/deliveryman',
+			templateUrl: 'templates/deliveryman/menu.html',
+			controller: 'DeliverymanMenuController'
+		})
+		.state('deliveryman.order', {
+			url: '/order',
+			templateUrl: 'templates/deliveryman/order.html',
+			controller: 'DeliverymanOrderController'
+		})
+		.state('deliveryman.view-order', {
+			cache: false,
+			url: '/view-order/:id',
+			templateUrl: 'templates/deliveryman/view-order.html',
+			controller: 'DeliverymanViewOrderController'
 		});
 	
 		$urlRouterProvider.otherwise('/login');

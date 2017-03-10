@@ -5,15 +5,21 @@ angular
 LoginController.$inject = [
 	'$scope',
 	'OAuth',
+	'OAuthToken',
 	'$ionicPopup',
-	'$state'
+	'$state',
+	'UserData',
+	'User',
 ];
 
 function LoginController(
 	$scope, 
 	OAuth, 
+	OAuthToken,
 	$ionicPopup,
-	$state
+	$state,
+	UserData,
+	User
 ) {
 	$scope.user = {
 		username: '',
@@ -23,13 +29,24 @@ function LoginController(
 	$scope.login = login;
 	
 	function login() {
-		OAuth.getAccessToken($scope.user).then(success, error);
+		var promise = OAuth.getAccessToken($scope.user);
 		
-		function success(res) {
+		promise
+			.then(successLogin)
+			.then(successUser, error);
+		
+		function successLogin(res) {
+			return User.authenticated({ include: 'client' }).$promise;
+		}
+		
+		function successUser(res) {
+			UserData.set(res.data);
 			$state.go('client.checkout');
 		}
 		
 		function error(err) {
+			UserData.set(null);
+			OAuthToken.removeToken();
 			$ionicPopup.alert({
 				title: 'Warning',
 				template: 'Invalid username or password'

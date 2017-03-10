@@ -1,6 +1,6 @@
 angular
 	.module('delivery.controllers')
-	.controller('ClientMenuController', ClientMenuController);
+	.controller('DeliverymanMenuController', ClientMenuController);
 
 ClientMenuController.$inject = [
 	'$scope',

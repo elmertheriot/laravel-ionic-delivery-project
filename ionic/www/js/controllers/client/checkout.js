@@ -9,7 +9,7 @@ ClientCheckoutController.$inject = [
 	'$ionicPopup',
 	'$cordovaBarcodeScanner',
 	'$cart',
-	'Order',
+	'ClientOrder',
 	'Coupon'
 ];
 
@@ -20,7 +20,7 @@ function ClientCheckoutController(
 	$ionicPopup,
 	$cordovaBarcodeScanner,
 	$cart,
-	Order,
+	ClientOrder,
 	Coupon
 ) {
 	var cart = $cart.get();
@@ -70,7 +70,7 @@ function ClientCheckoutController(
 			order.coupon_code = $scope.coupon.code;
 		}
 		
-		Order.save({ id: null }, order, success, error);
+		ClientOrder.save({ id: null }, order, success, error);
 		
 		function success(res) {
 			$ionicLoading.hide();

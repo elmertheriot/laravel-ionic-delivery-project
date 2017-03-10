@@ -1,19 +1,19 @@
 angular
 	.module('delivery.controllers')
-	.controller('ClientOrderController', ClientOrderController);
+	.controller('DeliverymanOrderController', ClientOrderController);
 
 ClientOrderController.$inject = [
 	'$scope',
 	'$state',
 	'$ionicLoading',
-	'ClientOrder'
+	'DeliverymanOrder'
 ];
 
 function ClientOrderController(
 	$scope,
 	$state,
 	$ionicLoading,
-	Order
+	DeliverymanOrder
 ) {
 	$scope.orders = [];
 	
@@ -32,7 +32,7 @@ function ClientOrderController(
 			sortedBy: 'desc'
 		};
 		
-		return ClientOrder.query(params).$promise;
+		return DeliverymanOrder.query(params).$promise;
 	}
 	
 	function loadOrders() {
@@ -61,6 +61,6 @@ function ClientOrderController(
 	}
 	
 	function openOrderDetail(order) {
-		$state.go('client.view-order', {id: order.id});
+		$state.go('deliveryman.view-order', {id: order.id});
 	}
 }
