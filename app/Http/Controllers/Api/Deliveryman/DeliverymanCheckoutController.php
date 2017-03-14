@@ -6,6 +6,7 @@ use DOLucasDelivery\Http\Controllers\Controller;
 use DOLucasDelivery\Repositories\OrderRepository;
 use DOLucasDelivery\Repositories\UserRepository;
 use DOLucasDelivery\Services\OrderService;
+use DOLucasDelivery\Models\Geo;
 use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 use Illuminate\Http\Request;
 
@@ -67,10 +68,17 @@ class DeliverymanCheckoutController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $idDeliveryman = Authorizer::getResourceOwnerId();
-        $order = $this->orderService->updateStatus($id, $idDeliveryman, $request->get('status'));
-        if ($order) {
-            return $this->orderRepository->find($order->id);
-        }
-        abort(400, 'Order not found');
+        return $order = $this->orderService->updateStatus($id, $idDeliveryman, $request->get('status'));
+    }
+    
+    public function geo(Request $request, Geo $geo, $id)
+    {
+        $idDeliveryman = Authorizer::getResourceOwnerId();
+        $order = $this->orderRepository->getByIdAndDeliveryman($id, $idDeliveryman);
+        
+        $geo->lat  = $request->get('lat');
+        $geo->long = $request->get('long');
+        
+        return $geo;
     }
 }

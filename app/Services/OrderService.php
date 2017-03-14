@@ -5,9 +5,10 @@ namespace DOLucasDelivery\Services;
 use DOLucasDelivery\Repositories\OrderRepository;
 use DOLucasDelivery\Repositories\CouponRepository;
 use DOLucasDelivery\Repositories\ProductRepository;
+use DOLucasDelivery\Models\Order;
 use Exception;
 use DB;
-use DOLucasDelivery\Models\Order;
+use DateTime;
 
 class OrderService
 {
@@ -90,13 +91,13 @@ class OrderService
     public function updateStatus($id, $idDeliveryman, $status)
     {
         $order = $this->orderRepository->getByIdAndDeliveryman($id, $idDeliveryman);
+        $order->status = $status;
         
-        if ($order instanceof Order) {
-            $order->status = $status;
-            $order->save();
-            return $order;
+        if (((int) $order->status) == 1 && !$order->hash) {
+            $order->hash = md5((new DateTime())->getTimestamp());
         }
         
-        return false;
+        $order->save();
+        return $order;
     }
 }
