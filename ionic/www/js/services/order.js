@@ -29,6 +29,14 @@ function DeliverymanOrderService($resource, appConfig) {
 	var config = {
 		query: {
 			isArray: false
+		},
+		updateStatus: {
+			method: 'PATCH',
+			url: url + '/update-status'
+		},
+		geo: {
+			method: 'POST',
+			url: url + '/geo'
 		}
 	};
 	

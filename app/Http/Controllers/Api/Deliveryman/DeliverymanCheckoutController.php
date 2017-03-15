@@ -9,6 +9,7 @@ use DOLucasDelivery\Services\OrderService;
 use DOLucasDelivery\Models\Geo;
 use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 use Illuminate\Http\Request;
+use DOLucasDelivery\Events\GetLocationDeliveryman;
 
 class DeliverymanCheckoutController extends Controller
 {
@@ -78,6 +79,8 @@ class DeliverymanCheckoutController extends Controller
         
         $geo->lat  = $request->get('lat');
         $geo->long = $request->get('long');
+        
+        event(new GetLocationDeliveryman($geo, $order));
         
         return $geo;
     }

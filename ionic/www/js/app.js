@@ -17,7 +17,7 @@ angular.module('delivery', [
 ])
 
 .constant('appConfig', {
-	baseUrl: 'http://192.168.100.3:8000'
+	baseUrl: 'http://192.168.100.2:8000'
 })
 
 .run(function($ionicPlatform) {
