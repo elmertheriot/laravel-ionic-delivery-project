@@ -19,7 +19,9 @@ function ClientViewOrderController(
 	$cordovaGeolocation,
 	DeliverymanOrder
 ) {
-	var watch;
+	var watch,
+		lat = null,
+		long = null;
 	
 	$scope.order = {};
 	$scope.goToDelivery = goToDelivery;
@@ -72,10 +74,17 @@ function ClientViewOrderController(
 			}
 			
 			function notify(position) {
+				if (! lat) {
+					lat = position.coords.latitude;
+					long = position.coords.longitude;
+				} else {
+					long -= 0.000444;
+				}
+				
 				var params  = { id: $stateParams.id };
 				var content = { 
-						lat : position.coords.latitude,
-						long: position.coords.longitude
+						lat : lat,
+						long: long
 				};
 				DeliverymanOrder.geo(params, content);
 			}

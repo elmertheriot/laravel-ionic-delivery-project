@@ -6,6 +6,7 @@ ClientOrderController.$inject = [
 	'$scope',
 	'$state',
 	'$ionicLoading',
+	'$ionicActionSheet',
 	'ClientOrder'
 ];
 
@@ -13,7 +14,8 @@ function ClientOrderController(
 	$scope,
 	$state,
 	$ionicLoading,
-	Order
+	$ionicActionSheet,
+	ClientOrder
 ) {
 	$scope.orders = [];
 	
@@ -25,6 +27,7 @@ function ClientOrderController(
 	
 	$scope.doRefresh = doRefresh;
 	$scope.openOrderDetail = openOrderDetail;
+	$scope.showActionSheet = showActionSheet;
 	
 	function getOrders() {
 		var params = {
@@ -62,5 +65,29 @@ function ClientOrderController(
 	
 	function openOrderDetail(order) {
 		$state.go('client.view-order', {id: order.id});
+	}
+	
+	function showActionSheet(order) {
+		$ionicActionSheet.show({
+			buttons: [
+			  { text: 'See details' },
+			  { text: 'See delivery' },
+			],
+			titleText: 'Select an option:',
+			cancelText: 'Cancel',
+			cancel: function () {
+				// to something
+			},
+			buttonClicked: function (index) {
+				switch (index) {
+					case 0:
+						$state.go('client.view-order', { id: order.id })
+						break;
+					case 1:
+						$state.go('client.view-delivery', { id: order.id })
+						break;
+				}
+			}
+		});
 	}
 }
