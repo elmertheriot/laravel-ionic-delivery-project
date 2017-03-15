@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class OrderTransformer extends TransformerAbstract
 {
-    protected $availableIncludes = ['coupon', 'items', 'client'];
+    protected $availableIncludes = ['coupon', 'items', 'client', 'deliveryman'];
     
     /**
      * Transform the \Order entity
@@ -58,5 +58,10 @@ class OrderTransformer extends TransformerAbstract
     public function includeClient(Order $model)
     {
         return $this->item($model->client, new ClientTransformer());
+    }
+    
+    public function includeDeliveryman(Order $model)
+    {
+        return $this->item($model->deliveryman, new DeliverymanTransformer());
     }
 }
