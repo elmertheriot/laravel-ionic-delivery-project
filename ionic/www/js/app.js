@@ -8,6 +8,7 @@ angular.module('delivery.filters', []);
 // the 2nd parameter is an array of 'requires'
 angular.module('delivery', [
 	'ionic',
+	'ionic.service.core',
 	'delivery.controllers',
 	'delivery.services',
 	'delivery.filters',
@@ -19,36 +20,16 @@ angular.module('delivery', [
 ])
 
 .constant('appConfig', {
-	baseUrl: 'http://192.168.100.2:8000',
+	baseUrl: 'http://192.168.100.3:8000',
 	pusherKey: 'f9f3915924c427028eda'
 })
 
-.run(function($ionicPlatform, $window, appConfig) {
-	$window.client = new Pusher(appConfig.pusherKey);
-	
-  $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
-      cordova.plugins.Keyboard.disableScroll(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-  });
-})
-
 .config(function (
-		$stateProvider, 
-		$urlRouterProvider, 
-		$provide, 
-		OAuthProvider, 
-		OAuthTokenProvider, 
+		$stateProvider,
+		$urlRouterProvider,
+		$provide,
+		OAuthProvider,
+		OAuthTokenProvider,
 		appConfig
 ) {
 	OAuthProvider.configure({
@@ -57,14 +38,14 @@ angular.module('delivery', [
     clientSecret: 'secret', // optional
     grantPath: '/oauth/access_token'
   });
-	
+
 	OAuthTokenProvider.configure({
 	  name: 'token',
 	  options: {
 	    secure: false
 	  }
 	});
-	
+
 	$stateProvider
 		.state('login', {
 			url: '/login',
@@ -75,7 +56,7 @@ angular.module('delivery', [
 			url: '/home',
 			templateUrl: 'templates/home.html',
 			controller: function ($scope) {
-				
+
 			}
 		})
 		.state('client', {
@@ -141,13 +122,13 @@ angular.module('delivery', [
 			templateUrl: 'templates/deliveryman/view-order.html',
 			controller: 'DeliverymanViewOrderController'
 		});
-	
+
 		$urlRouterProvider.otherwise('/login');
-		
+
 		$provide.decorator('OAuthToken', OAuthTokenLocalStorageDecorator);
-		
+
 		OAuthTokenLocalStorageDecorator.$inject = ['$localStorage', '$delegate'];
-		
+
 		function OAuthTokenLocalStorageDecorator($localStorage, $delegate) {
 			Object.defineProperties($delegate, {
 				setToken: {
@@ -177,4 +158,41 @@ angular.module('delivery', [
 			});
 			return $delegate;
 		}
+})
+
+.run(function($ionicPlatform, $window, $localStorage, appConfig) {
+	$window.client = new Pusher(appConfig.pusherKey);
+
+  $ionicPlatform.ready(function() {
+    if(window.cordova && window.cordova.plugins.Keyboard) {
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+
+      // Don't remove this line unless you know what you are doing. It stops the viewport
+      // from snapping when text inputs are focused. Ionic handles this internally for
+      // a much nicer keyboard experience.
+      cordova.plugins.Keyboard.disableScroll(true);
+    }
+
+    if(window.StatusBar) {
+      StatusBar.styleDefault();
+    }
+
+    Ionic.io();
+    var push = new Ionic.Push({
+    	debug: true,
+    	onNotification: function (message) {
+    		alert(message.text);
+    	},
+    	pluginCOnfig: {
+    		android: {
+    			iconColor: "red"
+    		}
+    	}
+    });
+    push.register(function (t) {
+    	$localStorage.set("device_token", t.token);
+    });
+  });
 });

@@ -9,6 +9,7 @@ use DOLucasDelivery\Models\Order;
 use Exception;
 use DB;
 use DateTime;
+use Dmitrovskiy\IonicPush\PushProcessor;
 
 class OrderService
 {
@@ -27,15 +28,22 @@ class OrderService
      * @var ProductRepository
      */
     private $productRepository;
+    
+    /**
+     * @var PushProcessor
+     */
+    private $pushProcessor;
 
     public function __construct(
         OrderRepository $orderRepository,
         CouponRepository $couponRepository,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
+        PushProcessor $pushProcessor
     ) {
         $this->orderRepository   = $orderRepository;
         $this->couponRepository  = $couponRepository;
         $this->productRepository = $productRepository;
+        $this->pushProcessor     = $pushProcessor;
     }
 
     public function create(array $data)
@@ -93,11 +101,21 @@ class OrderService
         $order = $this->orderRepository->getByIdAndDeliveryman($id, $idDeliveryman);
         $order->status = $status;
         
-        if (((int) $order->status) == 1 && !$order->hash) {
-            $order->hash = md5((new DateTime())->getTimestamp());
+        switch ((int) $status) {
+            case 1:
+                if (! $order->hash) {
+                    $order->hash = md5((new DateTime())->getTimestamp());
+                }
+                $order->save();
+                break;
+            case 2:
+                $user = $order->client->user;
+                $order->save();
+                $this->pushProcessor->notify([ $user->device_token ], [
+                    'alert' => sprintf('Your order %s has just been delivered.', $order->id)
+                ]);
+                break;
         }
-        
-        $order->save();
         return $order;
     }
 }

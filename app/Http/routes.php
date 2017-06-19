@@ -78,6 +78,7 @@ Route::group(['middleware' => 'cors'], function () {
         });
         
         Route::get('authenticated', 'Api\UserController@authenticated');
+        Route::patch('device_token', 'Api\UserController@updateDeviceToken');
         Route::get('coupon/{code}', 'Api\CouponController@show');
     });
 });
