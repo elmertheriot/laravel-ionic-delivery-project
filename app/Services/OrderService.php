@@ -112,7 +112,7 @@ class OrderService
                 $user = $order->client->user;
                 $order->save();
                 $this->pushProcessor->notify([ $user->device_token ], [
-                    'alert' => sprintf('Your order %s has just been delivered.', $order->id)
+                    'message' => sprintf('Your order %s has just been delivered.', $order->id)
                 ]);
                 break;
         }
