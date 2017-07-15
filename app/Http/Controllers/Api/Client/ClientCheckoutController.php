@@ -13,6 +13,7 @@ use DOLucasDelivery\Http\Requests\CheckoutRequest;
 
 class ClientCheckoutController extends Controller
 {
+    
     /**
      * @var OrderRepository
      */
@@ -27,11 +28,6 @@ class ClientCheckoutController extends Controller
      * @var OrderService
      */
     private $orderService;
-    
-    /**
-     * @var array
-     */
-    private $with = ['client', 'coupon', 'items'];
     
     public function __construct(
         OrderRepository $orderRepository,
@@ -52,7 +48,6 @@ class ClientCheckoutController extends Controller
         $orders = $this
             ->orderRepository
             ->skipPresenter(false)
-            ->with($this->with)
             ->scopeQuery(function ($query) use ($clientId) {
                 return $query->where('client_id', '=', $clientId);
             })->paginate();
@@ -70,19 +65,11 @@ class ClientCheckoutController extends Controller
 
         $order = $this->orderService->create($data);
         
-        return $this
-            ->orderRepository
-            ->skipPresenter(false)
-            ->with($this->with)
-            ->find($order->id);
+        return $this->orderRepository->skipPresenter(false)->find($order->id);
     }
     
     public function show($id)
     {
-        return $this
-            ->orderRepository
-            ->skipPresenter(false)
-            ->with($this->with)
-            ->find($id);
+        return $this->orderRepository->skipPresenter(false)->find($id);
     }
 }

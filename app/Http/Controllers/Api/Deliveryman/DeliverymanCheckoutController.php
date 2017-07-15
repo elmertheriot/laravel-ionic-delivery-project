@@ -27,11 +27,6 @@ class DeliverymanCheckoutController extends Controller
      * @var OrderService
      */
     private $orderService;
-
-    /**
-     * @var array
-     */
-    private $with = ['client', 'coupon', 'items'];
     
     public function __construct(
         OrderRepository $orderRepository,
@@ -49,7 +44,6 @@ class DeliverymanCheckoutController extends Controller
         $orders = $this
             ->orderRepository
             ->skipPresenter(false)
-            ->with($this->with)
             ->scopeQuery(function ($query) use ($id) {
                 return $query->where('user_deliveryman_id', '=', $id);
             })->paginate();

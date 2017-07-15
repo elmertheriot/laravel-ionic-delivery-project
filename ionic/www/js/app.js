@@ -20,7 +20,7 @@ angular.module('delivery', [
 ])
 
 .constant('appConfig', {
-	baseUrl: 'http://192.168.100.3:8000',
+	baseUrl: 'http://0.0.0.0:8000',
 	pusherKey: 'f9f3915924c427028eda'
 })
 
