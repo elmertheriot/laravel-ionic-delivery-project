@@ -2,7 +2,7 @@
 
 This project was develop for study of Laravel 5.1 and Ionic 1. It is basically a mobile application built with Ionic consuming a REST API built with Laravel.
 
-### Laravel
+## Laravel
 
 - ### Install
 
@@ -23,7 +23,7 @@ This project was develop for study of Laravel 5.1 and Ionic 1. It is basically a
   php artisar serve --host=0.0.0.0:8000
   ```
 
-### Ionic
+## Ionic
 
 - ### Install
 
