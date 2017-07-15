@@ -1,25 +1,68 @@
-Ionic App Base
-=====================
+## Laravel Ionic Delivery Project
 
-A starting project for Ionic that optionally supports using custom SCSS.
+This project was develop for study of Laravel 5.1 and Ionic 1. It is basically a mobile application built with Ionic consuming a REST API built with Laravel.
 
-## Using this project
+### Laravel
 
-We recommend using the [Ionic CLI](https://github.com/driftyco/ionic-cli) to create new Ionic projects that are based on this project but use a ready-made starter template.
+- ### Install
 
-For example, to start a new Ionic project with the default tabs interface, make sure the `ionic` utility is installed:
+  To install this application following the instructions below is necessary to have Composer and PHP CLI.
 
-```bash
-$ npm install -g ionic
-```
+  ```
+  git clone https://github.com/deoliveiralucas/laravel-ionic-project.git
+  cd laravel-ionic-project
+  composer install
+  ```
 
-Then run: 
+- ### Execute
 
-```bash
-$ ionic start myProject tabs
-```
+  Before continue the process, it is important to create and configure the `.env` file, like the `.env.example`.
 
-More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page and the [Ionic CLI](https://github.com/driftyco/ionic-cli) repo.
+  ```
+  php artisan migrate --seed
+  php artisar serve --host=0.0.0.0:8000
+  ```
 
-## Issues
-Issues have been disabled on this repo, if you do find an issue or have a question consider posting it on the [Ionic Forum](http://forum.ionicframework.com/).  Or else if there is truly an error, follow our guidelines for [submitting an issue](http://ionicframework.com/submit-issue/) to the main Ionic repository.
+### Ionic
+
+- ### Install
+
+  Inside the same directory where the Laravel application was cloned.
+
+  ```
+  cd ionic
+  npm install
+  bower install
+  ```
+
+- ### Execute
+
+  Just set the push notification as development mode, run and access the browser.
+
+  ```
+  ionic config set dev_push
+  ionic serve
+  ```
+  
+## Screenshots
+
+- Menu with options to all user orders and create a new one.
+
+  ![](https://raw.githubusercontent.com/deoliveiralucas/laravel-ionic-delivery-project/master/docs/screenshot1.png) 
+  
+- List of all products that the user has added to the cart with the option to add a coupon discount with QR Code.
+
+  ![](https://raw.githubusercontent.com/deoliveiralucas/laravel-ionic-delivery-project/master/docs/screenshot2.png)
+
+- List of all the user orders with the option to see more details or to see the delivery.
+
+  ![](https://raw.githubusercontent.com/deoliveiralucas/laravel-ionic-delivery-project/master/docs/screenshot3.png)
+
+- Detail of an order with a map to see where is the delivery man.
+
+  ![](https://raw.githubusercontent.com/deoliveiralucas/laravel-ionic-delivery-project/master/docs/screenshot4.png)
+
+---
+
+<img height="60" align="left" src="https://raw.githubusercontent.com/deoliveiralucas/laravel-ionic-delivery-project/master/docs/laravel.png" />
+<img height="60" align="left" src="https://raw.githubusercontent.com/deoliveiralucas/laravel-ionic-delivery-project/master/docs/ionic.png" />

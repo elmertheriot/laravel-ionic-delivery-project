@@ -1,27 +1,68 @@
-## Laravel PHP Framework
+## Laravel Ionic Delivery Project
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+This project was develop for study of Laravel 5.1 and Ionic 1. It is basically a mobile application built with Ionic consuming a REST API built with Laravel.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+### Laravel
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+- ### Install
 
-## Official Documentation
+  To install this application following the instructions below is necessary to have Composer and PHP CLI.
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+  ```
+  git clone https://github.com/deoliveiralucas/laravel-ionic-project.git
+  cd laravel-ionic-project
+  composer install
+  ```
 
-## Contributing
+- ### Execute
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+  Before continue the process, it is important to create and configure the `.env` file, like the `.env.example`.
 
-## Security Vulnerabilities
+  ```
+  php artisan migrate --seed
+  php artisar serve --host=0.0.0.0:8000
+  ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+### Ionic
 
-### License
+- ### Install
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+  Inside the same directory where the Laravel application was cloned.
+
+  ```
+  cd ionic
+  npm install
+  bower install
+  ```
+
+- ### Execute
+
+  Just set the push notification as development mode, run and access the browser.
+
+  ```
+  ionic config set dev_push
+  ionic serve
+  ```
+  
+## Screenshots
+
+- Menu with options to all user orders and create a new one.
+
+  ![](https://raw.githubusercontent.com/deoliveiralucas/laravel-ionic-delivery-project/master/docs/screenshot1.png) 
+  
+- List of all products that the user has added to the cart with the option to add a coupon discount with QR Code.
+
+  ![](https://raw.githubusercontent.com/deoliveiralucas/laravel-ionic-delivery-project/master/docs/screenshot2.png)
+
+- List of all the user orders with the option to see more details or to see the delivery.
+
+  ![](https://raw.githubusercontent.com/deoliveiralucas/laravel-ionic-delivery-project/master/docs/screenshot3.png)
+
+- Detail of an order with a map to see where is the delivery man.
+
+  ![](https://raw.githubusercontent.com/deoliveiralucas/laravel-ionic-delivery-project/master/docs/screenshot4.png)
+
+---
+
+<img height="60" align="left" src="https://raw.githubusercontent.com/deoliveiralucas/laravel-ionic-delivery-project/master/docs/laravel.png" />
+<img height="60" align="left" src="https://raw.githubusercontent.com/deoliveiralucas/laravel-ionic-delivery-project/master/docs/ionic.png" />
