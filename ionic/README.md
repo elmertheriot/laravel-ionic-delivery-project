@@ -46,15 +46,15 @@ This project was develop for study of Laravel 5.1 and Ionic 1. It is basically a
   
 ## Screenshots
 
-- Menu with options to all user orders and create a new one.
+- Menu with options to see user orders and create a new one.
 
   ![](https://raw.githubusercontent.com/deoliveiralucas/laravel-ionic-delivery-project/master/docs/screenshot1.png) 
   
-- List of all products that the user has added to the cart with the option to add a coupon discount with QR Code.
+- List of products that the user has added to the cart with the option to add a coupon discount with QR Code.
 
   ![](https://raw.githubusercontent.com/deoliveiralucas/laravel-ionic-delivery-project/master/docs/screenshot2.png)
 
-- List of all the user orders with the option to see more details or to see the delivery.
+- List of the user orders with the option to see more details or to see the delivery.
 
   ![](https://raw.githubusercontent.com/deoliveiralucas/laravel-ionic-delivery-project/master/docs/screenshot3.png)
 
